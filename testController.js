@@ -11,7 +11,11 @@ const syncFun = catchAsyncErrors((req, res, next) => {
 
 const asyncFun = catchAsyncErrors(async (req, res, next) => {
         const data = await TestRepository.testAdd(req.body.name)
+        res.send({
+            data : data
+        })
 })
+
 
 module.exports = {syncFun, asyncFun}
 

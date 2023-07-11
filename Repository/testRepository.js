@@ -6,7 +6,7 @@ const TestRepository = new class {
             name : name
         }).save();
         
-        res.send("OK")
+        return `${name} added successfully`
      }
 }
 
