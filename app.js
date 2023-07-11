@@ -14,8 +14,8 @@ app.get('/sync', syncFun)
 
 // middlewares
 app.use('/', router);
-app.use(errorMiddleware)
 
+app.use(errorMiddleware)
 
 app.listen(3001, () => {
     console.log("Server running fine on port 3001");
