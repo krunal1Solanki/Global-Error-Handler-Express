@@ -12,7 +12,7 @@ const validateName = (req, res, next) => {
       return next(new ErrorHandlerClass(errorMessage, 400));
     }
     next();
-  };
+};
 
 
 

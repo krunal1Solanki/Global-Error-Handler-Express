@@ -55,11 +55,22 @@ const errorMiddleware = (err, req, res, next) => {
       default:
         statusText = "Unknown Error";
     }
-  
-    res.status(err.statusCode).json({
-      status: err.statusCode,
-      error: err.message,
-    });
+    if (err instanceof Function) {
+      // Execute the asynchronous function and handle errors
+      err().catch((error) => {
+        console.error('Async Function Error:', error);
+        res.status(err.statusCode).json({
+          status: err.statusCode,
+          error: error.message,
+        });
+      });
+    } else {
+      // Handle other types of errors
+      res.status(err.statusCode).json({
+        status: err.statusCode,
+        error: err.message,
+      });
+    }
   };
   
   module.exports = errorMiddleware;

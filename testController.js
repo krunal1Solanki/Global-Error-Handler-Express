@@ -1,24 +1,22 @@
-const Joi = require('joi');
-const person = require("./person");
-const catchAsyncErrors = require('./middlewares/catchAsyncErrors');
-const ErrorHandlerClass = require("./utils/ErorrHandlerClass");
-const TestRepository = require('./Repository/testRepository');
+    const Joi = require('joi');
+    const person = require("./person");
+    const catchAsyncErrors = require('./middlewares/catchAsyncErrors');
+    const ErrorHandlerClass = require("./utils/ErorrHandlerClass");
+    const TestRepository = require('./Repository/testRepository');
 
-const syncFun = catchAsyncErrors((req, res, next) => {
-    return next(new ErrorHandlerClass("This is my custom error",400))
-})
+    const syncFun = catchAsyncErrors((req, res, next) => {
+        return next(new ErrorHandlerClass("This is my custom error",400))
+    })
 
 
-const asyncFun = catchAsyncErrors(async (req, res, next) => {
-        // const data = await TestRepository.testAdd(req.body.name)
-        const { name } = req.body;
-         new person({
-            name : name
-        }).save();
+    const asyncFun = catchAsyncErrors(async (req, res, next) => {
+            const data =  await TestRepository.testAdd(req.body.name)
+            res.send({
+                status : 201,
+                message : data
+            })
         
-        res.send("OK")
-     
-})
+    })
 
-module.exports = {syncFun, asyncFun}
+    module.exports = {syncFun, asyncFun}
 

@@ -5,8 +5,7 @@ const TestRepository = new class {
         await new person({
             name : name
         }).save();
-        
-        res.send("OK")
+        return 'created successfully'
      }
 }
 
